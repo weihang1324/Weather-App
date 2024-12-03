@@ -209,4 +209,48 @@ h1 {
     .weather-cards {
         grid-template-columns: 1fr; 
     }
+    /* Chatbot Styling */
+/* Chatbot Styling */
+/* Chatbot Container */
+.chatbot-container {
+    position: fixed;
+    bottom: 60px;  /* Adjust to be just above the "Use Current Location" button */
+    right: 20px;   /* Position it to the right of the screen */
+    width: 300px;  /* Adjust the width of the chatbot */
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: #f0f0f0;  /* Light gray background */
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+    z-index: 999;
+}
+
+/* Chatbot Messages */
+.messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bot-message {
+    background-color: #007bff;  /* Blue background for bot messages */
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    align-self: flex-start;
+}
+
+.user-message {
+    background-color: #28a745;  /* Green background for user messages */
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    align-self: flex-end;
+}
+
+
 }
