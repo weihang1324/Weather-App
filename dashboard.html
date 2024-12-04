@@ -10,53 +10,51 @@
         <script src="script.js" defer></script>
     </head>
     <body>
-       <h1>Weather Dashboard</h1>
-       <div class="container">
-            <div class="weather-input">
-                <h3>Enter a City Name</h3>
-                <input class="city-input" placeholder="E.g: Malaysia, New York, China">
-                <button class="search-btn">Search</button>
-                <div class="separator"></div>
-                <button class="location-btn">Use current Location</button>
-            </div>
-            <div class="weather-data">
-                <div class="current-weather">
-                    <div class="details">
-                        <h2>_____(_____)</h2>
-                        <h4>Temperature: __°C</h4>
-                        <h4>Wind: __ M/S</h4>
-                        <h4>Humidity: __%</h4>
+        <!-- Add background container class here -->
+        <div class="dashboard-background">
+            <h1>Weather Dashboard</h1>
+            <div class="container">
+                <div class="weather-input">
+                    <h3>Enter a City Name</h3>
+                    <input class="city-input" placeholder="E.g: Malaysia, New York, China">
+                    <button class="search-btn">Search</button>
+                    <div class="separator"></div>
+                    <button class="location-btn">Use current Location</button>
+                </div>
+                <div class="weather-data">
+                    <div class="current-weather">
+                        <div class="details">
+                            <h2>_____(_____)</h2>
+                            <h4>Temperature: __°C</h4>
+                            <h4>Wind: __ M/S</h4>
+                            <h4>Humidity: __%</h4>
+                        </div>
+                    </div>
+                    <div class="day-forecast">
+                        <h2>5-Day Forecast</h2>
+                        <div class="weather-cards">
+                            <!-- Weather cards will go here -->
+                        </div>
                     </div>
                 </div>
-                <div class="day-forecast">
-                    <h2>5-Day Forecast</h2>
-                    <div class="weather-cards">
-                        
+            </div>
+            <div class="chatbot">
+                <div class="chatbox">
+                    <div class="chatbot-header">
+                        <h3>Chatbot</h3>
                     </div>
+                    <div class="messages">
+                        <!-- Messages will be added dynamically here -->
+                    </div>
+                    <input type="text" class="user-input" placeholder="Type your message...">
+                    <button class="send-btn">Send</button>
                 </div>
-            </div>
-       </div>
-       <div class="chatbot">
-        <div class="chatbox">
-            <div class="chatbot-header">
-                <h3>Chatbot</h3>
-            </div>
-            <div class="messages">
-                <!-- Messages will be added dynamically here -->
-            </div>
-            <input type="text" class="user-input" placeholder="Type your message...">
-            <button class="send-btn">Send</button>
-        </div>
-    
-        <div class="chat-options">
-            <button class="option-btn-cold">Find the Cold Place</button>
-            <button class="option-btn-travel">Recommend Travel Place</button>
-        </div>
-    </div>
-    <div class="chatbot-container">
-        <div class="messages"></div> <!-- Container for chat messages -->
-    </div>
-    
 
+                <div class="chat-options">
+                    <button class="option-btn-cold">Find the Cold Place</button>
+                    <button class="option-btn-travel">Recommend Travel Place</button>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

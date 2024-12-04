@@ -73,6 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         weatherCardsDiv.insertAdjacentHTML("beforeend", createWeatherCard(cityName, weatherItem, index));  
                     }
                 });
+
+                // Clear the city input after fetching data
+                cityInput.value = "";
             })
             .catch(error => {
                 console.error("Error fetching weather data:", error);
@@ -101,6 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Error fetching coordinates:", error);
                 alert("An error occurred while fetching the coordinates!");
             });
+
+        // Clear the city input after fetching coordinates
+        cityInput.value = "";
     };
 
     // Function to get the user's coordinates using geolocation
@@ -135,6 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
+
+        // Clear the city input after using current location
+        cityInput.value = "";
     };
 
     // Function to handle the chatbot interaction
