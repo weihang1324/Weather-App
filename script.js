@@ -45,22 +45,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // Function to fetch weather details
     const getWeatherDetails = (cityName, lat, lon) => {
         const WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
-
         fetch(WEATHER_API_URL)
             .then(res => res.json())
             .then(data => {
-                const uniqueForecastDays = [];
-                const sixDaysForecast = data.list.filter(forecast => {
-                    const forecastDate = new Date(forecast.dt_txt).getDate();
-                    if (!uniqueForecastDays.includes(forecastDate) && uniqueForecastDays.length < 6) {
-                        uniqueForecastDays.push(forecastDate);
-                        return true;
+                const forecastData = data.list;
+                const sixDaysForecast = [];
+                let lastDate = null;
+
+                forecastData.forEach(forecast => {
+                    const forecastDate = new Date(forecast.dt_txt).toISOString().split("T")[0];  // Extract date part only (YYYY-MM-DD)
+
+                    // If it's a new day (or today), add it to the forecast list
+                    if (lastDate !== forecastDate && sixDaysForecast.length < 6) {
+                        sixDaysForecast.push(forecast);
+                        lastDate = forecastDate;
                     }
-                    return false;
                 });
 
-                // Do not clear the entire currentWeatherDiv and weatherCardsDiv
-                // Instead, only update the weather cards
+                currentWeatherDiv.innerHTML = "";
                 weatherCardsDiv.innerHTML = ""; // Clear forecast cards (but not the current weather)
 
                 // Add the current weather card first
@@ -157,10 +159,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 messagesDiv.innerHTML += `<div class="bot-message"><p>Fetching the coolest place for you...</p></div>`;
                 getColdPlaces();
             } else if (message.includes("travel") || message.includes("best")) {
-                messagesDiv.innerHTML += `<div class="bot-message"><p>Fetching the best travel destination...</p></div>`;
+                messagesDiv.innerHTML += `<div class="bot-message"><p>Fetching the recomment travel place...</p></div>`;
                 getTravelDestinations();
             } else {
-                messagesDiv.innerHTML += `<div class="bot-message"><p>I didn't understand that. You can ask about cold places or best travel destinations.</p></div>`;
+                messagesDiv.innerHTML += `<div class="bot-message"><p>I didn't understand that. You can ask about cold places or recoomend travel place or use the button below.</p></div>`;
             }
 
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
@@ -203,10 +205,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Function to get the best travel destinations
     const getTravelDestinations = () => {
         const travelDestinations = [
-            { name: "Paris", lat: 48.8566, lon: 2.3522 },
-            { name: "Kyoto", lat: 35.0116, lon: 135.7681 },
-            { name: "Santorini", lat: 36.3932, lon: 25.4615 },
-            { name: "New York", lat: 40.7128, lon: -74.0060 }
+            { name: "Paris", lat: 48.8566, lon: 2.3522 },  
+            { name: "New York", lat: 40.7128, lon: -74.0060 },  
+            { name: "Rome", lat: 41.9028, lon: 12.4964 }, 
+            { name: "Kyoto", lat: 35.0116, lon: 135.7681 }, 
+            { name: "London", lat: 51.5074, lon: -0.1278 }, 
+            { name: "Sydney", lat: -33.8688, lon: 151.2093 },  
+            { name: "Bangkok", lat: 13.7563, lon: 100.5018 },  
+            { name: "Istanbul", lat: 41.0082, lon: 28.9784 }, 
+            { name: "Machu Picchu", lat: -13.1631, lon: -72.5450 }  
         ];
 
         // Randomly select a travel destination
@@ -223,12 +230,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.querySelector(".option-btn-cold").addEventListener("click", () => {
-        displayMessage("Fetching the coolest place for you...", 1000);
+        displayMessage("Fetching the coolest place for you...",500 );
         getColdPlaces();
     });
 
     document.querySelector(".option-btn-travel").addEventListener("click", () => {
-        displayMessage("Fetching the best travel destination...", 1000);
+        displayMessage("Fetching the best travel destination...", 500);
         getTravelDestinations();
     });
 

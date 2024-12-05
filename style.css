@@ -62,7 +62,8 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 100vh;  /* Ensures the background covers the whole screen */
+    min-height: 100vh;  
+    
 }
 
 /* Dashboard Page Styling */
@@ -78,6 +79,7 @@ h1 {
     display: flex;
     gap: 35px;
     padding: 30px;
+    
 }
 
 .weather-input {
@@ -107,11 +109,11 @@ h1 {
 
 .separator::before {
     content: "or";
-    color: #6C757D;
+    color: #ffffff;
     font-size: 1.18rem;
     padding: 0 15px;
     margin-top: -4px;
-    background: #ffffff;
+    background: #6C757D;
 }
 
 .weather-input button {
@@ -181,7 +183,7 @@ h1 {
 .day-forecast h2 {
     font-size: 1.5rem;
     margin: 20px 0;
-    color: #415ddb;
+    color: #000000;
     text-align: center;
     font-weight: bold;
 }
@@ -249,12 +251,12 @@ h1 {
 /* Chatbot Styling */
 .chatbot-container {
     position: fixed;
-    bottom: 60px;  
-    right: 20px;   
+    bottom: 5px;  
+    left: 20px;   
     width: 300px;  
-    max-height: 400px;
+    max-height: 350px;
     overflow-y: auto;
-    background-color: #f0f0f0;  /* Light gray background */
+    background-color:rgba(240, 240, 240, 0.9);  /* Light gray background */
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -262,27 +264,105 @@ h1 {
     z-index: 999;
 }
 
-/* Chatbot Messages */
-.messages {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.bot-message {
-    background-color: #007bff;  /* Blue background for bot messages */
+/* Chatbot Styling - continued */
+.chatbot-header {
+    background-color: #5372f0;
     color: white;
     padding: 10px;
-    border-radius: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.messages {
+    height: 150px;
+    overflow-y: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-message, .chatbot-message {
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
     max-width: 80%;
-    align-self: flex-start;
 }
 
 .user-message {
-    background-color: #28a745;  /* Green background for user messages */
+    background-color: #0ed844; 
+    color: white; 
+    align-self: flex-end; 
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+    max-width: 70%; 
+    border: 1px solid #ccc; 
+}
+
+.chatbot-message {
+    background-color: #e1e1e1;
+    color: black;
+    align-self: flex-start;
+}
+
+.user-input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
+}
+
+.send-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #5372f0;
     color: white;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 80%;
-    align-self: flex-end;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.send-btn:hover {
+    background-color: #415ddb;
+}
+
+/* Chat Options Section */
+.chat-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.option-btn-cold, .option-btn-travel {
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+.option-btn-cold:hover, .option-btn-travel:hover, .search.btn, .location-btn {
+    background-color: #5372f0;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #415ddb;
+    color: white;
+    font-size: 1rem;
 }
