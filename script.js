@@ -48,34 +48,40 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch(WEATHER_API_URL)
             .then(res => res.json())
             .then(data => {
-                const forecastData = data.list;
-                const sixDaysForecast = [];
-                let lastDate = null;
-
-                forecastData.forEach(forecast => {
-                    const forecastDate = new Date(forecast.dt_txt).toISOString().split("T")[0];  // Extract date part only (YYYY-MM-DD)
-
-                    // If it's a new day (or today), add it to the forecast list
-                    if (lastDate !== forecastDate && sixDaysForecast.length < 6) {
-                        sixDaysForecast.push(forecast);
-                        lastDate = forecastDate;
+                // Declare uniqueForecastDays before the filter method
+                const uniqueForecastDays = [];
+                
+                // Filter the forecast data for unique days
+                const sixDaysForecast = data.list.filter(forecast => {
+                    // Extract date in YYYY-MM-DD format from forecast.dt_txt
+                    const forecastDate = new Date(forecast.dt_txt).toLocaleDateString('en-CA'); // 'en-CA' format is YYYY-MM-DD
+                    
+                    // If this date is not in uniqueForecastDays, add it
+                    if (!uniqueForecastDays.includes(forecastDate)) {
+                        uniqueForecastDays.push(forecastDate); // Add the unique date
+                        return true; // Keep this forecast
                     }
+                    return false; // Skip duplicate forecasts
                 });
-
+    
+                console.log("Full forecast data:", data);
+                console.log(`Captured forecast for ${sixDaysForecast.length} unique days.`);
+    
+                // Clear previous weather cards
                 currentWeatherDiv.innerHTML = "";
-                weatherCardsDiv.innerHTML = ""; // Clear forecast cards (but not the current weather)
-
-                // Add the current weather card first
+                weatherCardsDiv.innerHTML = "";
+    
+                // Add the current weather card (for today) first
                 sixDaysForecast.forEach((weatherItem, index) => {  
                     if (index === 0) {
-                        // Update or add the current weather card
-                        currentWeatherDiv.innerHTML = createWeatherCard(cityName, weatherItem, index);  
+                        // Add current weather card
+                        currentWeatherDiv.innerHTML = createWeatherCard(cityName, weatherItem, index);
                     } else {
-                        // Add forecast cards
-                        weatherCardsDiv.insertAdjacentHTML("beforeend", createWeatherCard(cityName, weatherItem, index));  
+                        // Add forecast cards for the next days
+                        weatherCardsDiv.insertAdjacentHTML("beforeend", createWeatherCard(cityName, weatherItem, index));
                     }
                 });
-
+    
                 // Clear the city input after fetching data
                 cityInput.value = "";
             })
@@ -84,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("An error occurred while fetching the weather forecast!");
             });
     };
+    
 
     // Function to get the coordinates of a city from user input
     const getCityCoordinates = () => {
